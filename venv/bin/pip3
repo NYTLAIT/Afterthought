@@ -1,4 +1,4 @@
-#!/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/server/venv/bin/python3
+#!/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/server/venv"
+setenv VIRTUAL_ENV "/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

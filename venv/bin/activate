@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/server/venv"
+VIRTUAL_ENV="/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

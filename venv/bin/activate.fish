@@ -29,7 +29,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/server/venv"
+set -gx VIRTUAL_ENV "/Users/nytlait/noaa_ap/GitHub6/Afterthought-Class-Recap/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
