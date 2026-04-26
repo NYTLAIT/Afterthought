@@ -1,4 +1,4 @@
-## Blueprints ##
+## Models ##
 
 ### user.py ###
 IMPORTS

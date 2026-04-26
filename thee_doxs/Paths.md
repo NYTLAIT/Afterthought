@@ -1,4 +1,5 @@
-## Paths and Actions: ##
+## Paths and Actions ##
+
 ### Authentication ###
 - /login
 GET: Show login form
