@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from extensions import db
 
@@ -10,7 +10,7 @@ class Course(db.Model):
         id:          Auto-incremented primary key.
         user_id:     Foreign key referencing the owning User.
         sessions:    Related Session records (deleted with the course).
-        name:        Name of the course (max 120 characters).
+        title:        Name of the course (max 120 characters).
         description: Optional longer description of the course.
         start_date:  When the course begins.
         end_date:    When the course ends.
@@ -31,8 +31,8 @@ class Course(db.Model):
     start_date = db.Column(db.DateTime, index=True)
     end_date = db.Column(db.DateTime)
 
-    created_at = db.Column(db.DateTime, default=datetime.now, index=True)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
 
     def __repr__(self):
-        return f"<Course {self.title}>"if self.title else f"<Course {self.id}>"
+        return f"<Course {self.title}>" if self.title else f"<Course {self.id}>"

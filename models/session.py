@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from extensions import db
 
@@ -11,7 +11,8 @@ class Session(db.Model):
         user_id:    Foreign key referencing the owning User.
         course_id:  Foreign key referencing the parent Course.
         title:      Optional short title for the session (max 120 characters).
-        content:    Main body content of the session.
+        summary:    Main body content of the session, summary of session.
+        notes:      Additional notes
         reflection: User's reflection or notes on the session.
         questions:  Optional questions raised during the session.
         created_at: Timestamp of when this record was created.
@@ -24,12 +25,13 @@ class Session(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False, index=True)
 
     title = db.Column(db.String(120), index=True)
-    content = db.Column(db.Text, nullable=False)
+    summary = db.Column(db.Text, nullable=False)
+    notes = db.Column(db.Text)
     reflection = db.Column(db.Text, nullable=False)
     questions = db.Column(db.Text)
 
-    created_at = db.Column(db.DateTime, default=datetime.now, index=True)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
 
     def __repr__(self):
         return f"<Session {self.title}>" if self.title else f"<Session {self.id}>"

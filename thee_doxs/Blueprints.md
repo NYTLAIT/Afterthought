@@ -98,5 +98,44 @@ NOTES:
 - One-to-Many relationships do not need a new model, Many-to-Many does - which we may implement if want users to share courses; (association table)
 
 ### session.py ###
+ATTRIBUTES:
+- id: for other models
+auto generate uniqie number
+primary key
 
+- user_id: just to make sure user exists
+index true for easy filtering
+
+- course_id: foreign key for course
+connects to parent course
+
+- title: name of session
+optional but useful for searching
+index true
+
+- summary: summary of session
+required
+
+- notes: any additional notes outside of summary
+optional
+
+reflection: user thoughts/feelings of content
+required
+
+questions: questions raise during session
+optional
+
+Datetime:
+- created_at: when session was created
+datetime
+- updated_at: last update time
+datetime
+
+DB LINGO:
+foreignkey -> (course_id) ensures every session belongs to a valid course
+relationship -> defined in course
+
+NOTES:
+- Session is lead node (does not own anything, only belongs to something)
+- Access sessions through user.courses -> course.sessions or user.sessions
 

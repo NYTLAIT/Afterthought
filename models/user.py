@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from flask_login import UserMixin
 
 from extensions import db, bcrypt
@@ -9,6 +9,8 @@ class User(db.Model, UserMixin):
 
     Attributes:
         id:            Auto-incremented primary key.
+        courses:       Related Course records (deleted with the user).
+        sessions:      Related Session records (deleted with the user).
         username:      Unique display name (max 20 characters).
         email:         Unique email address (max 120 characters).
         password_hash: Bcrypt-hashed password.
@@ -24,6 +26,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
 
     courses = db.relationship('Course', backref='user', cascade='all, delete-orphan')
+    sessions = db.relationship('Session', backref='user', cascade='all, delete-orphan')
 
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -33,8 +36,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     dob = db.Column(db.DateTime, nullable=False)
 
-    created_at = db.Column(db.DateTime, default=datetime.now, index=True)
-    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
 
     def set_password(self, password):
         '''
