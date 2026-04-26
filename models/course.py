@@ -17,7 +17,7 @@ class Course(db.Model):
         created_at:  Timestamp of when this record was created.
         updated_at:  Timestamp of the most recent update to this record.
     '''
-    
+
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -25,7 +25,7 @@ class Course(db.Model):
 
     sessions = db.relationship('Session', backref='course', cascade='all, delete-orphan')
 
-    name = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text)
 
     start_date = db.Column(db.DateTime, index=True)
@@ -35,4 +35,4 @@ class Course(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     def __repr__(self):
-        return f"<Course {self.name}>"
+        return f"<Course {self.title}>"if self.title else f"<Course {self.id}>"
