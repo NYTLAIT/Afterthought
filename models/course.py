@@ -28,8 +28,8 @@ class Course(db.Model):
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text)
 
-    start_date = db.Column(db.DateTime, index=True)
-    end_date = db.Column(db.DateTime)
+    start_date = db.Column(db.Date, index=True)
+    end_date = db.Column(db.Date)
 
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)

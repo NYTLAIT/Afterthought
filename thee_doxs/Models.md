@@ -66,18 +66,18 @@ index true because constant filter
 
 - sessions: establish one to many relationships with courses
 
-- name: name of course
+- title: title of course
 required
 - description: description of course
 nullable
 
 - start_date: when course starts
-datetime
+date
 nullable
 index
 - end_date: when course ends
-datetime
-nullableå
+date
+nullable
 
 Datetime:
 - created_at: when course was created
@@ -89,7 +89,7 @@ DB LINGO:
 foreignkey -> database rule that links two tables together, specifically: the value in user_id must match an existing id in the users table.
 relationship() -> allows accessing objects directly (relationship ('Child, backref='parent', ...))
 backref -> creates two way shortcut so user.courses works
-cascade -> controls what happens when parent is deleted (all, deete-orphan, all sessions are deleted)
+cascade -> defines behavior when parent is deleted (e.g. delete child rows automatically with all, delete-orphan)
 
 NOTES:
 - Foreign Keys are database level and stores real values (ensures valid references, enforces strctures, required for joins) while Relationship is convenience layer
@@ -103,7 +103,7 @@ ATTRIBUTES:
 auto generate uniqie number
 primary key
 
-- user_id: just to make sure user exists
+- user_id: foreign key referencing user who owns/created session
 index true for easy filtering
 
 - course_id: foreign key for course
@@ -119,10 +119,10 @@ required
 - notes: any additional notes outside of summary
 optional
 
-reflection: user thoughts/feelings of content
+- reflection: user thoughts/feelings of content
 required
 
-questions: questions raise during session
+- questions: questions raise during session
 optional
 
 Datetime:
@@ -133,9 +133,9 @@ datetime
 
 DB LINGO:
 foreignkey -> (course_id) ensures every session belongs to a valid course
-relationship -> defined in course
+relationship -> Session belongs to both User and Course (denormalized for performance)
 
 NOTES:
-- Session is lead node (does not own anything, only belongs to something)
+- Session is lead node Session is a leaf node (it belongs to a course and optionally a user)
 - Access sessions through user.courses -> course.sessions or user.sessions
 

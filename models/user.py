@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
 
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
-    dob = db.Column(db.DateTime, nullable=False)
+    dob = db.Column(db.Date, nullable=False)
 
     created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
     updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
