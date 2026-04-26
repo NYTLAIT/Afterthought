@@ -14,6 +14,7 @@ class Course(db.Model):
         description: Optional longer description of the course.
         start_date:  When the course begins.
         end_date:    When the course ends.
+        last_viewed: Timestamp of when user last viewed course
         created_at:  Timestamp of when this record was created.
         updated_at:  Timestamp of the most recent update to this record.
     '''
@@ -31,8 +32,10 @@ class Course(db.Model):
     start_date = db.Column(db.Date, index=True)
     end_date = db.Column(db.Date)
 
-    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
-    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
+    last_viewed = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
+    created_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc))
+
 
     def __repr__(self):
         return f"<Course {self.title}>" if self.title else f"<Course {self.id}>"

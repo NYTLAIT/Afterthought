@@ -36,9 +36,8 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     dob = db.Column(db.Date, nullable=False)
 
-    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
-    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
-
+    created_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc))
     def set_password(self, password):
         '''
         Hash and set password

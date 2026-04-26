@@ -15,6 +15,7 @@ class Session(db.Model):
         notes:      Additional notes
         reflection: User's reflection or notes on the session.
         questions:  Optional questions raised during the session.
+        last_viewed: Timestamp of when user last viewed session
         created_at: Timestamp of when this record was created.
         updated_at: Timestamp of the most recent update to this record.
     '''
@@ -25,13 +26,14 @@ class Session(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False, index=True)
 
     title = db.Column(db.String(120), index=True)
-    summary = db.Column(db.Text, nullable=False)
+    summary = db.Column(db.Text)
     notes = db.Column(db.Text)
-    reflection = db.Column(db.Text, nullable=False)
+    reflection = db.Column(db.Text)
     questions = db.Column(db.Text)
 
-    created_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), index=True)
-    updated_at = db.Column(db.DateTime(timezone=True), default=datetime.now(timezone.utc), onupdate=datetime.now)
+    last_viewed = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
+    created_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), index=True)
+    updated_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc))
 
     def __repr__(self):
         return f"<Session {self.title}>" if self.title else f"<Session {self.id}>"

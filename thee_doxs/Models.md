@@ -139,3 +139,4 @@ NOTES:
 - Session is lead node Session is a leaf node (it belongs to a course and optionally a user)
 - Access sessions through user.courses -> course.sessions or user.sessions
 
+

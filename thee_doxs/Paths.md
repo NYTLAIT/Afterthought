@@ -11,6 +11,13 @@ POST: Create a new user account
 - /logout
 POST: Log the current user out
 
+### User ###
+- /dashboard
+GET: Show most recently viewed sessions and active courses plus most recently accessed course
+
+- /sessions
+GET: Retrieve and display all sessions for the current user
+
 ### Courses ###
 - /courses
 GET: Retrieve and display all courses for the current user
