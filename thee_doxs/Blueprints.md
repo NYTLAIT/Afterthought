@@ -116,4 +116,4 @@ NOTES:
 - any(iterable) to check if any matches
 - current_user.courses returns list of Course objects not a query object, cant call .query.filter_by() on it
     - either use Course.query.filter_by with the user id and the title or any(iterable with the relationship)
-- 
+- get_or_404() in case it doesnt exist, just like how apps do it, just make sure nav bar is working in base html
