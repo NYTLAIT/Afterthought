@@ -80,6 +80,18 @@ Context: defined user.courses, course.sessions, session.course, etc:
 - Able to do -> current_user.courses
 - No more -> Course.query.filter_by(user_id=current_user.id).all()
 
+### Model Stages ###
+- db.session.add(instance) -> stage changes to session
+- db.session.commit() -> finalize and send SQL to database and clears session
+- Do not need add() when updating data
+    user.username = 'new_username'
+    db.session.commit()
+- db.session.delete(instance) -> delete data (must commit after like add())
+
+BASICALLY:
+- Creating or deleting -> add() / delete() + commit()
+- Updating -> just commit()
+
 ### Overview Core Queries ###
 Not Set in Stone, will erase note if ever updated
 - AUTH

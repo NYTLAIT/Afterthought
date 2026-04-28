@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
-from datetime import datetime
+from datetime import date
 
 from extensions import db
 from models.user import User
@@ -15,9 +15,9 @@ def signup():
         return redirect(url_for('dashboard.dashboard'))
     
     if request.method == 'POST':
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        dob = datetime.strptime(request.form['dob'], '%Y-%m-%d').date()
+        first_name = request.form['first-name']
+        last_name = request.form['last-name']
+        dob = date.fromisoformat(request.form['dob'])
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
