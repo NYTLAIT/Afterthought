@@ -31,9 +31,9 @@ class Session(db.Model):
     reflection = db.Column(db.Text)
     questions = db.Column(db.Text)
 
-    last_viewed = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
+    last_viewed = db.Column(db.DateTime(timezone=True), index=True)
     created_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), index=True)
-    updated_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime(timezone=True), default=None, onupdate=lambda:datetime.now(timezone.utc))
 
     def __repr__(self):
         return f"<Session {self.title}>" if self.title else f"<Session {self.id}>"

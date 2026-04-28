@@ -26,15 +26,15 @@ class Course(db.Model):
 
     sessions = db.relationship('Session', backref='course', cascade='all, delete-orphan')
 
-    title = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(120), unique=True, nullable=False)
     description = db.Column(db.Text)
 
     start_date = db.Column(db.Date, index=True)
     end_date = db.Column(db.Date)
 
-    last_viewed = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
+    last_viewed = db.Column(db.DateTime(timezone=True), index=True)
     created_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), index=True)
-    updated_at = db.Column(db.DateTime(timezone=True), default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime(timezone=True), default=None, onupdate=lambda:datetime.now(timezone.utc))
 
 
     def __repr__(self):

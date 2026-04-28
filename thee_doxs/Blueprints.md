@@ -108,3 +108,12 @@ Not Set in Stone, will erase note if ever updated
 
 ## ACTUAL BLUEPRINTS ##
 ### auth.py ###
+
+
+### course.py ###
+
+NOTES:
+- any(iterable) to check if any matches
+- current_user.courses returns list of Course objects not a query object, cant call .query.filter_by() on it
+    - either use Course.query.filter_by with the user id and the title or any(iterable with the relationship)
+- 
