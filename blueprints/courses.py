@@ -51,15 +51,28 @@ def new():
 @login_required
 def show_all():
     courses = current_user.courses
-
     return render_template('courses.html', courses=courses)
+
 
 @courses.route('/<int:course_id>')
 @login_required
 def show_one(course_id):
+    context = request.args.get('context', 'dashboard')
 
     course = Course.query.get(course_id)
-    return render_template('courses/show.html', course=course, sessions=sessions)
+
+    if course.user_id != current_user.id:
+        flash('Unauthorized.', 'error')
+        if context == 'courses':
+            return redirect(url_for('courses.show_all'))
+        return redirect(url_for('dashboard.index'))
+
+    course.last_viewed = datetime.now(timezone.utc)
+    db.session.commit()
+
+    sessions = Session.query.filter_by(course_id=course.id).order_by(Session.created_at.desc()).all()
+
+    return render_template('course.html', course=course, sessions=sessions)
 
 @courses.route('/<int:course_id>/edit', methods=['GET', 'POST'])
 @login_required
