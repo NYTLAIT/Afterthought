@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}New Session{% endblock %}
+
+{% block content_header %}
+<a href="{{ url_for('courses.show_one', course_id=course.id) }}">←</a>
+<h1 class="content-title">New Session — {{ course.title }}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <label>Title:
+        <input type="text" name="title">
+    </label>
+    <label>Summary:
+        <textarea name="summary"></textarea>
+    </label>
+    <label>Notes:
+        <textarea name="notes"></textarea>
+    </label>
+    <label>Reflection:
+        <textarea name="reflection"></textarea>
+    </label>
+    <label>Questions:
+        <textarea name="questions"></textarea>
+    </label>
+    <button type="submit">Create Session</button>
+</form>
+<a href="{{ url_for('courses.show_one', course_id=course.id) }}">Cancel</a>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ session.title or "Untitled Session" }}{% endblock %}
+
+{% block content_header %}
+<a href="{{ url_for('courses.show_one', course_id=session.course_id) }}">←</a>
+<h1 class="content-title">{{ session.title or "Untitled Session" }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="session-controls">
+    <a href="{{ url_for('sessions.edit', session_id=session.id) }}">Edit Session</a>
+    <form method="POST" action="{{ url_for('sessions.delete', session_id=session.id) }}">
+        <button type="submit" onclick="return confirm('Delete this session?')">Delete</button>
+    </form>
+</div>
+
+{% if session.summary %}
+<h2>Summary</h2>
+<p>{{ session.summary }}</p>
+{% endif %}
+
+{% if session.notes %}
+<h2>Notes</h2>
+<p>{{ session.notes }}</p>
+{% endif %}
+
+{% if session.reflection %}
+<h2>Reflection</h2>
+<p>{{ session.reflection }}</p>
+{% endif %}
+
+{% if session.questions %}
+<h2>Questions</h2>
+<p>{{ session.questions }}</p>
+{% endif %}
+
+<small>Created: {{ session.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+{% endblock %}

@@ -6,6 +6,7 @@ from models.user import User
 from blueprints.auth import auth
 from blueprints.dashboard import dashboard
 from blueprints.courses import courses
+from blueprints.sessions import sessions
 
 app = Flask(__name__)
 
@@ -34,6 +35,7 @@ def home():
 app.register_blueprint(auth)
 app.register_blueprint(courses)
 app.register_blueprint(dashboard)
+app.register_blueprint(sessions)
 
 # Create tables
 with app.app_context():
