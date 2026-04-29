@@ -27,6 +27,8 @@ class Course(db.Model):
     sessions = db.relationship('Session', backref='course', cascade='all, delete-orphan')
 
     title = db.Column(db.String(120), unique=True, nullable=False)
+    __table_args__ = (db.UniqueConstraint('user_id', 'title', name='uq_course_user_title'),)
+    
     description = db.Column(db.Text)
 
     start_date = db.Column(db.Date, index=True)

@@ -1,11 +1,16 @@
 from flask import Blueprint, redirect, render_template, url_for, flash, request
 from flask_login import login_required, current_user
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 
 from extensions import db
 from models.course import Course
 from models.session import Session
 
+# Helpers
+def parse_date(value):
+    return date.fromisoformat(value) if value else None
+
+# Actual
 courses = Blueprint('courses', __name__, url_prefix='/courses')
 
 @courses.route('/new', methods=['GET', 'POST'])
@@ -33,8 +38,8 @@ def new():
             user_id=current_user.id,
             title=title,
             description=description,
-            start_date=start_date,
-            end_date=end_date,
+            start_date=parse_date(request.form.get('start-date')),
+            end_date=parse_date(request.form.get('end-date')),
         )
         db.session.add(course)
         db.session.commit()
@@ -52,7 +57,7 @@ def new():
 def show_all():
     context = 'show_all'
     courses = current_user.courses
-    return render_template('courses.html', courses=courses)
+    return render_template('courses/courses.html', courses=courses)
 
 
 @courses.route('/<int:course_id>')
@@ -71,7 +76,7 @@ def show_one(course_id):
     db.session.commit()
 
     sessions = Session.query.filter_by(course_id=course.id).order_by(Session.created_at.desc()).all()
-    return render_template('course.html', course=course, sessions=sessions)
+    return render_template('courses/course.html', course=course, sessions=sessions)
 
 
 @courses.route('/<int:course_id>/edit', methods=['GET', 'POST'])
@@ -93,19 +98,19 @@ def edit(course_id):
         existing = Course.query.filter_by(user_id=current_user.id, title=new_title).first()
         if existing and existing.id != course.id:
             flash('Title taken.', 'error')
-            return redirect(url_for('courses.edit', context=context))
+            return redirect(url_for('courses.edit', course_id=course_id, context=context))
 
         course.title = new_title
         course.description = request.form.get('description')
         
-        course.start_date = request.form.get('start-date')
-        course.end_date = request.form.get('end-date')
+        course.start_date = parse_date(request.form.get('start-date'))
+        course.end_date = parse_date(request.form.get('end-date'))
 
         db.session.commit()
 
         flash('Course updated.', 'success')
         return redirect(url_for('courses.show_one', course_id=course.id))
 
-    return render_template('courses/edit.html', course=course)
+    return render_template('courses/edit.html', course=course, context=context)
 
 

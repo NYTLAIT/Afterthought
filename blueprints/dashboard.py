@@ -18,17 +18,17 @@ def index():
         .all()
     )
 
-    # # Most recent sessions
-    # recent_sessions = (
-    #     Session.query
-    #     .filter_by(user_id=current_user.id)
-    #     .order_by(Session.created_at.desc())
-    #     .limit(12)
-    #     .all()
-    # )
+    # Most recently viewed sessions
+    recent_sessions = (
+        Session.query
+        .filter_by(user_id=current_user.id)
+        .order_by(Session.created_at.desc())
+        .limit(12)
+        .all()
+    )
 
     return render_template(
         'dashboard.html',
         recent_courses=recent_courses,
-        # recent_sessions=recent_sessions
+        recent_sessions=recent_sessions
     )

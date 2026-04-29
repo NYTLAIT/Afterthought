@@ -2,7 +2,7 @@
 
 {% block title %}{{ course.title }}{% endblock %}
 
-{% block content header %}
+{% block content_header %}
 <a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
 <h1 class="content-title">{{ course.title }}</h1>
 {% endblock %}
@@ -34,7 +34,7 @@
     {% for session in sessions %}
     <li>
         <strong>{{ session.title or "Untitled" }}</strong><br>
-        {{ session.summary[:100] }}...
+        {{ (session.summary or '')[:100] }}...
     </li>
     {% else %}
     <p>No sessions yet.</p>

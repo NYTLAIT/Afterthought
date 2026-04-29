@@ -12,15 +12,13 @@
         {% if current_user.is_authenticated %}
         <div class="nav-links">
             <a href="/dashboard">Dashboard</a>
-            <a href="/courses">Courses</a>
+            <a href="{{ url_for('courses.show_all')}}">Courses</a>
             <a href="/sessions">Sessions</a>
         </div>
 
         <div class="nav-account-control">
             <p>{{current_user.username}}</p>
-            <form action="/logout" method="POST">
-                <button type="submit">Logout</button>
-            </form>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
         </div>
 
         {% else %}
