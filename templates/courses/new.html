@@ -2,7 +2,7 @@
 
 {% block title %}New Course{% endblock %}
 
-{% block content header %}
+{% block content_header %}
 <a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
 <h1 class="content-title">Create New Course</h1>
 {% endblock %}

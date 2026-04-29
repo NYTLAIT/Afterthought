@@ -25,7 +25,7 @@
 
         {% else %}
         <div class="nav-account-control">
-            {% nav_options block %}
+            {% block nav_options %}
             <a href="/login">Login</a>
             <a href="/signup">Signup</a>
             {% endblock %}
@@ -47,7 +47,7 @@
 
     <!-- Main Content -->
     <div class="content-header">
-        {% block content header %}
+        {% block content_header %}
         {% endblock %}
     </div>
 

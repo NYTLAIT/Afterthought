@@ -54,7 +54,7 @@ def signup():
 def login():
 
     if current_user.is_authenticated:
-        return redirect(url_for('dashboard.dashboard'))
+        return redirect(url_for('dashboard.index'))
     
     if request.method == 'POST':
         username = request.form['username']
@@ -68,7 +68,7 @@ def login():
             return redirect(url_for('auth.login'))
         
         login_user(user)
-        return redirect(url_for('dashboard.dashboard'))
+        return redirect(url_for('dashboard.index'))
     
     return render_template('login.html')
     
