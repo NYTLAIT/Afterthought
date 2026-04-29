@@ -8,7 +8,7 @@ from models.session import Session
 
 courses = Blueprint('courses', __name__, url_prefix='/courses')
 
-@courses.route('/courses/new', methods=['GET', 'POST'])
+@courses.route('/new', methods=['GET', 'POST'])
 @login_required
 def new():
     '''

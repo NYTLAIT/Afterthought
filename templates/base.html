@@ -9,24 +9,30 @@
 <body>
     <!-- Nav -->
     <nav>
-        <a href="/">Home</a>
-
         {% if current_user.is_authenticated %}
-        <a href="/courses">Courses</a>
-        <form action="/logout" method="POST" style="display:inline;">
-            <button type="submit">Logout</button>
-        </form>
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/courses">Courses</a>
+            <a href="/sessions">Sessions</a>
+        </div>
+
+        <div class="nav-account-control">
+            <p>{{current_user.username}}</p>
+            <form action="/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
 
         {% else %}
-        {% nav_options block %}
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
-        {% endblock %}
+        <div class="nav-account-control">
+            {% nav_options block %}
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+            {% endblock %}
+        </div>
 
         {% endif %}
     </nav>
-
-    <hr>
 
     <!-- Flash -->
     {% with messages = get_flashed_messages() %}
@@ -40,6 +46,11 @@
     {% endwith %}
 
     <!-- Main Content -->
+    <div class="content-header">
+        {% block content header %}
+        {% endblock %}
+    </div>
+
     {% block content %}
     {% endblock %}
 </body>

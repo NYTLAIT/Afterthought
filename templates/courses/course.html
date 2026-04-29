@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content header %}
+<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
+<h1 class="content-title">{{ course.title }}</h1>
+{% endblock %}
+
+
+{% block content %}
+<div class="course-controls">
+    <p>{{ course.description }}</p>
+
+    <div class="course-controls-right">
+        <p>
+            Start: {{ course.start_date or "N/A" }} |
+            End: {{ course.end_date or "N/A" }}
+        </p>
+        <a class='a-button' href="{{ url_for('courses.edit', course_id=course.id, context='courses') }}">
+            Edit Course
+        </a>
+    </div>
+
+</div>
+
+<h2>Sessions</h2>
+
+<a href="{{ url_for('sessions.new', course_id=course.id) }}">
+    + Add Session
+</a>
+
+<ul>
+    {% for session in sessions %}
+    <li>
+        <strong>{{ session.title or "Untitled" }}</strong><br>
+        {{ session.summary[:100] }}...
+    </li>
+    {% else %}
+    <p>No sessions yet.</p>
+    {% endfor %}
+</ul>
+
+{% endblock %}

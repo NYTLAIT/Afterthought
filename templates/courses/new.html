@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}New Course{% endblock %}
+
+{% block content header %}
+<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
+<h1 class="content-title">Create New Course</h1>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <label>Title:
+        <input type="text" name="title" required>
+    </label>
+    <label>Description:
+        <input type="text" name="description">
+    </label>
+    <label>Start Date:
+        <input type="text" name="start-date">
+    </label>
+    <label>End Date:
+        <input type="text" name="end-date">
+    </label>
+
+    <button type="submit">Create Course</button>
+</form>
+<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">Back</a>
+{% endblock %}

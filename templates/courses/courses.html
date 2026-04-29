@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content header %}
+<h1 class="content-title">Your Courses</h1>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('courses.new', context='courses') }}">+ New Course</a>
+
+<ul>
+    {% for course in courses %}
+    <li>
+        <a href="{{ url_for('courses.show_one', course_id=course.id, context='courses') }}">{{ course.title }}</a>
+    </li>
+    {% else %}
+    <p>No courses yet.</p>
+    {% endfor %}
+</ul>
+
+{% endblock %}

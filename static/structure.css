@@ -1,0 +1,35 @@
+/* GLOBAL */
+
+/* content header */
+.back {
+    justify-self: flex-start;
+}
+
+.content-title {
+    justify-self: center;
+}
+
+/* CUSTOM */
+
+/* base.html */
+nav {
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 1rem;
+}
+
+.nav-links {
+    display: flex;
+    justify-self: flex-start;
+}
+
+.nav-account-control {
+    display: flex;
+    justify-self: flex-end;
+}
+
+.content-header {
+    width: 100%;
+    display: flex;
+}
