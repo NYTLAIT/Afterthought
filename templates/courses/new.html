@@ -7,20 +7,23 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <label>Title:
-        <input type="text" name="title" required>
-    </label>
-    <label>Description:
-        <textarea name="description"></textarea>
-    </label>
-    <label>Start Date:
-        <input type="date" name="start-date">
-    </label>
-    <label>End Date:
-        <input type="date" name="end-date">
-    </label>
-    <button type="submit">Create Course</button>
-</form>
+<div class="card">
+    <form method="POST">
+        <label>Title:
+            <input type="text" name="title" required>
+        </label>
+        <label>Description:
+            <textarea name="description"></textarea>
+        </label>
+        <label>Start Date:
+            <input type="date" name="start-date">
+        </label>
+        <label>End Date:
+            <input type="date" name="end-date">
+        </label>
+        <button type="submit">Create Course</button>
+    </form>
+</div>
+
 <a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">Back</a>
 {% endblock %}

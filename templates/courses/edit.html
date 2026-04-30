@@ -7,20 +7,22 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <label>Title:
-        <input type="text" name="title" value="{{ course.title }}">
-    </label>
-    <label>Description:
-        <textarea name="description">{{ course.description }}</textarea>
-    </label>
-    <label>Start Date:
-        <input type="date" name="start-date" value="{{ course.start_date }}">
-    </label>
-    <label>End Date:
-        <input type="date" name="end-date" value="{{ course.end_date }}">
-    </label>
-    <button type="submit">Save Changes</button>
-</form>
+<div class="card">
+    <form method="POST">
+        <label>Title:
+            <input type="text" name="title" value="{{ course.title }}">
+        </label>
+        <label>Description:
+            <textarea name="description">{{ course.description }}</textarea>
+        </label>
+        <label>Start Date:
+            <input type="date" name="start-date" value="{{ course.start_date }}">
+        </label>
+        <label>End Date:
+            <input type="date" name="end-date" value="{{ course.end_date }}">
+        </label>
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
 <a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">Cancel</a>
 {% endblock %}

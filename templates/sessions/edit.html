@@ -7,23 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <label>Title:
-        <input type="text" name="title" value="{{ session.title or '' }}">
-    </label>
-    <label>Summary:
-        <textarea name="summary">{{ session.summary or '' }}</textarea>
-    </label>
-    <label>Notes:
-        <textarea name="notes">{{ session.notes or '' }}</textarea>
-    </label>
-    <label>Reflection:
-        <textarea name="reflection">{{ session.reflection or '' }}</textarea>
-    </label>
-    <label>Questions:
-        <textarea name="questions">{{ session.questions or '' }}</textarea>
-    </label>
-    <button type="submit">Save Changes</button>
-</form>
+<div class="card">
+    <form method="POST">
+        <label>Title:
+            <input type="text" name="title" value="{{ session.title or '' }}">
+        </label>
+        <label>Summary:
+            <textarea name="summary">{{ session.summary or '' }}</textarea>
+        </label>
+        <label>Notes:
+            <textarea name="notes">{{ session.notes or '' }}</textarea>
+        </label>
+        <label>Reflection:
+            <textarea name="reflection">{{ session.reflection or '' }}</textarea>
+        </label>
+        <label>Questions:
+            <textarea name="questions">{{ session.questions or '' }}</textarea>
+        </label>
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+
 <a href="{{ url_for('sessions.show_one', session_id=session.id, context=context) }}">Cancel</a>
 {% endblock %}

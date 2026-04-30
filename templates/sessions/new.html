@@ -7,23 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <label>Title:
-        <input type="text" name="title">
-    </label>
-    <label>Summary:
-        <textarea name="summary"></textarea>
-    </label>
-    <label>Notes:
-        <textarea name="notes"></textarea>
-    </label>
-    <label>Reflection:
-        <textarea name="reflection"></textarea>
-    </label>
-    <label>Questions:
-        <textarea name="questions"></textarea>
-    </label>
-    <button type="submit">Create Session</button>
-</form>
+<div class="card">
+    <form method="POST">
+        <label>Title:
+            <input type="text" name="title">
+        </label>
+        <label>Summary:
+            <textarea name="summary"></textarea>
+        </label>
+        <label>Notes:
+            <textarea name="notes"></textarea>
+        </label>
+        <label>Reflection:
+            <textarea name="reflection"></textarea>
+        </label>
+        <label>Questions:
+            <textarea name="questions"></textarea>
+        </label>
+        <button type="submit">Create Session</button>
+    </form>
+</div>
+
 <a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">Cancel</a>
 {% endblock %}

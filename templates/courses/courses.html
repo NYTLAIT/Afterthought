@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Courses{% endblock %}
 
 {% block content_header %}
@@ -7,16 +6,18 @@
 {% endblock %}
 
 {% block content %}
-<a href="{{ url_for('courses.new', context='courses') }}">+ New Course</a>
+<div class="section-header">
+    <h2></h2>
+    <a class="btn btn-primary" href="{{ url_for('courses.new', context='courses') }}">+ New Course</a>
+</div>
 
-<ul>
+<div class="list">
     {% for course in courses %}
-    <li>
-        <a href="{{ url_for('courses.show_one', course_id=course.id, context='courses') }}">{{ course.title }}</a>
-    </li>
+    <a class="list-item" href="{{ url_for('courses.show_one', course_id=course.id, context='courses') }}">
+        <h3>{{ course.title }}</h3>
+    </a>
     {% else %}
-    <p>No courses yet.</p>
+    <p class="muted">No courses yet.</p>
     {% endfor %}
-</ul>
-
+</div>
 {% endblock %}
