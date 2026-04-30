@@ -21,7 +21,7 @@
         <label>End Date:
             <input type="date" name="end-date" value="{{ course.end_date }}">
         </label>
-        <button type="submit">Save Changes</button>
+        <button class='btn' type="submit">Save Changes</button>
     </form>
 </div>
 <a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">Cancel</a>
