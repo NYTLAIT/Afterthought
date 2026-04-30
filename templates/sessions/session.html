@@ -2,7 +2,11 @@
 {% block title %}{{ session.title or "Untitled Session" }}{% endblock %}
 
 {% block content_header %}
-<a href="{{ url_for('courses.show_one', course_id=session.course_id, context=context) }}" class="back-link">←</a>
+<a href="
+    {%- if context == 'course' -%}{{ url_for('courses.show_one', course_id=session.course_id, context='course') }}
+    {%- elif context == 'sessions' -%}{{ url_for('sessions.show_all') }}
+    {%- else -%}{{ url_for('dashboard.index') }}
+    {%- endif -%}" class="back-link">←</a>
 <h1 class="content-title">{{ session.title or "Untitled Session" }}</h1>
 {% endblock %}
 

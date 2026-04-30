@@ -1,5 +1,10 @@
 ## CONTEXT VALUES ##
 
+### sessions ###
+  Set when: navigating from the /sessions list page
+  Used in:  sessions.show_one, sessions.edit, sessions.delete
+  Back arrow goes to: sessions.show_all
+
 ### courses ###
   Set when: navigating from the /courses list page
   Used in:  courses.new, courses.show_one, courses.edit, courses.delete
@@ -33,3 +38,8 @@
 ## HOW DO ##
 GET routes:  query param  -> ?context=courses
 POST delete: hidden input -> <input type="hidden" name="context" value="{{ context }}">
+
+### For sessions ###
+  context == 'course'   -> courses.show_one
+  context == 'sessions' -> sessions.show_all
+  context == 'dashboard'-> dashboard.index (default)

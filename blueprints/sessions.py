@@ -9,10 +9,17 @@ from models.course import Course
 sessions = Blueprint('sessions', __name__, url_prefix='/sessions')
 
 
+@sessions.route('/')
+@login_required
+def show_all():
+    sessions = Session.query.filter_by(user_id=current_user.id).order_by(Session.created_at.desc()).all()
+    return render_template('sessions/sessions.html', sessions=sessions)
+
+
 @sessions.route('/new', methods=['GET', 'POST'])
 @login_required
 def new():
-    context = request.args.get('context', 'dashboard')
+    context = request.args.get('context', 'course')
     course_id = request.args.get('course_id', type=int)
     course = Course.query.get_or_404(course_id)
 
@@ -20,6 +27,8 @@ def new():
         flash('Unauthorized.', 'error')
         if context == 'course':
             return redirect(url_for('courses.show_one', course_id=course_id))
+        if context == 'sessions':
+            return redirect(url_for('sessions.show_all'))
         return redirect(url_for('dashboard.index'))
 
     if request.method == 'POST':
@@ -37,6 +46,8 @@ def new():
         flash('Session created.', 'success')
         if context == 'course':
             return redirect(url_for('courses.show_one', course_id=course_id))
+        if context == 'sessions':
+            return redirect(url_for('sessions.show_all'))
         return redirect(url_for('dashboard.index'))
 
     return render_template('sessions/new.html', course=course, context=context)
@@ -52,6 +63,8 @@ def show_one(session_id):
         flash('Unauthorized.', 'error')
         if context == 'course':
             return redirect(url_for('courses.show_one', course_id=session.course_id))
+        if context == 'sessions':
+            return redirect(url_for('sessions.show_all'))
         return redirect(url_for('dashboard.index'))
 
     session.last_viewed = datetime.now(timezone.utc)
@@ -70,6 +83,8 @@ def edit(session_id):
         flash('Unauthorized.', 'error')
         if context == 'course':
             return redirect(url_for('courses.show_one', course_id=session.course_id))
+        if context == 'sessions':
+            return redirect(url_for('sessions.show_all'))
         return redirect(url_for('dashboard.index'))
 
     if request.method == 'POST':
@@ -95,6 +110,8 @@ def delete(session_id):
         flash('Unauthorized.', 'error')
         if context == 'course':
             return redirect(url_for('courses.show_one', course_id=session.course_id))
+        if context == 'sessions':
+            return redirect(url_for('sessions.show_all'))
         return redirect(url_for('dashboard.index'))
 
     course_id = session.course_id
@@ -103,4 +120,6 @@ def delete(session_id):
     flash('Session deleted.', 'success')
     if context == 'course':
         return redirect(url_for('courses.show_one', course_id=course_id))
+    if context == 'sessions':
+        return redirect(url_for('sessions.show_all'))
     return redirect(url_for('dashboard.index'))

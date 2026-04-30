@@ -13,7 +13,7 @@
         <div class="nav-links">
             <a href="/dashboard">Dashboard</a>
             <a href="{{ url_for('courses.show_all')}}">Courses</a>
-            <a href="/sessions">Sessions</a>
+            <!-- <a href="/sessions">Sessions</a> -->
         </div>
 
         <div class="nav-account-control">
@@ -33,11 +33,11 @@
     </nav>
 
     <!-- Flash -->
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
     <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
+        {% for category, message in messages %}
+        <li class="flash flash-{{ category }}">{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}

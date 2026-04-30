@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Sessions{% endblock %}
+
+{% block content_header %}
+<h1 class="content-title">Your Sessions</h1>
+{% endblock %}
+
+{% block content %}
+<div class="list">
+    {% for session in sessions %}
+    <a class="list-item" href="{{ url_for('sessions.show_one', session_id=session.id, context='sessions') }}">
+        <h3>{{ session.title or "Untitled" }}</h3>
+        <p class="muted">{{ (session.summary or '')[:120] }}...</p>
+        <p class="muted small">{{ session.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    </a>
+    {% else %}
+    <p class="muted">No sessions yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
