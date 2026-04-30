@@ -4,7 +4,10 @@
 {% block content %}
 <h1>Dashboard</h1>
 
-<h2>Recent Courses</h2>
+<div class="section-header">
+    <h2>Recent Courses</h2>
+    <a class="btn btn-secondary" href="{{ url_for('courses.new', context='dashboard') }}">+ New Course</a>
+</div>
 <ul>
     {% for course in recent_courses %}
     <li>
@@ -22,7 +25,10 @@
 
 <hr>
 
-<h2>Recent Sessions</h2>
+<div class="section-header">
+    <h2>Recent Sessions</h2>
+    <!-- <a class="btn btn-secondary" href="{{ url_for('courses.show_all') }}">+ New Session</a> -->
+</div>
 <ul>
     {% for session in recent_sessions %}
     <li>
