@@ -8,20 +8,21 @@
     <h2>Recent Courses</h2>
     <a class="btn btn-secondary" href="{{ url_for('courses.new', context='dashboard') }}">+ New Course</a>
 </div>
-<ul>
+
+<div class="list">
     {% for course in recent_courses %}
-    <li>
-        <a href="{{ url_for('courses.show_one', course_id=course.id, context='dashboard') }}">
-            {{ course.title }}
-        </a>
+    <a class="list-item" href="{{ url_for('courses.show_one', course_id=course.id, context='dashboard') }}">
+        <h3>{{ course.title }}</h3>
         {% if course.last_viewed %}
-        <small>(Last viewed: {{ course.last_viewed.strftime('%Y-%m-%d %H:%M') }})</small>
+        <p class="muted small">
+            Last viewed: {{ course.last_viewed.strftime('%Y-%m-%d %H:%M') }}
+        </p>
         {% endif %}
-    </li>
+    </a>
     {% else %}
-    <p>No recent courses.</p>
+    <p class="muted">No recent courses.</p>
     {% endfor %}
-</ul>
+</div>
 
 <hr>
 
@@ -29,16 +30,15 @@
     <h2>Recent Sessions</h2>
     <!-- <a class="btn btn-secondary" href="{{ url_for('courses.show_all') }}">+ New Session</a> -->
 </div>
-<ul>
+
+<div class="list">
     {% for session in recent_sessions %}
-    <li>
-        <a href="{{ url_for('sessions.show_one', session_id=session.id, context='dashboard') }}">
-            <strong>{{ session.title or "Untitled" }}</strong><br>
-            {{ (session.summary or '')[:100] }}...
-        </a>
-    </li>
+    <a class="list-item" href="{{ url_for('sessions.show_one', session_id=session.id, context='dashboard') }}">
+        <h3>{{ session.title or "Untitled" }}</h3>
+        <p class="muted">{{ (session.summary or '')[:100] }}...</p>
+    </a>
     {% else %}
-    <p>No sessions yet.</p>
+    <p class="muted">No sessions yet.</p>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

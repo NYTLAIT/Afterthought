@@ -1,25 +1,24 @@
 {% extends "base.html" %}
-
 {% block title %}Login{% endblock %}
 
 {% block nav_options %}
-<a href="/signup">Signup</a>
+<a class="btn btn-primary" href="/signup">Signup</a>
 {% endblock %}
 
 {% block content %}
-<div class="Login block">
+<div class="block card">
     <h2>Login</h2>
 
     <form method="POST">
         <label>Username:
-            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="username" required>
         </label>
+
         <label>Password:
-            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="password" name="password" required>
         </label>
-        <br>
-        <button type="submit">Login</button>
+
+        <button class="btn btn-primary" type="submit">Login</button>
     </form>
 </div>
-
 {% endblock %}

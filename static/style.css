@@ -1,0 +1,199 @@
+/* =========================
+   THEME VARIABLES (DARK)
+========================= */
+
+:root {
+    --bg: #0f172a;
+    /* deep slate */
+    --surface: #111827;
+    /* cards/nav */
+    --border: #1f2933;
+    /* subtle borders */
+    --text: #e5e7eb;
+    /* main text */
+    --muted: #9ca3af;
+    /* secondary text */
+
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+
+    --danger: #ef4444;
+    --danger-hover: #f87171;
+
+    --radius: 11px;
+}
+
+/* =========================
+   BASE
+========================= */
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    color: var(--text);
+}
+
+p {
+    margin: 0.3rem 0;
+    color: var(--text);
+}
+
+a {
+    text-decoration: none;
+    color: var(--muted);
+}
+
+a:hover {
+    color: var(--text);
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* =========================
+   LIST ITEMS
+========================= */
+
+.list-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: 0.15s;
+}
+
+.list-item:hover {
+    border-color: var(--primary);
+    background: #0b1220;
+    /* subtle hover lift */
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    border-radius: var(--radius);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: transparent;
+    color: var(--text);
+}
+
+/* primary */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+/* secondary */
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* danger */
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+}
+
+/* =========================
+   FORMS
+========================= */
+
+input,
+textarea {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 0.45rem;
+    font-size: 0.9rem;
+    background: #020617;
+    color: var(--text);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--muted);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* =========================
+   TEXT UTILITIES
+========================= */
+
+.muted {
+    color: var(--muted);
+}
+
+.small {
+    font-size: 0.8rem;
+}
+
+/* =========================
+   FLASH
+========================= */
+
+.flash {
+    padding: 0.6rem;
+    border-radius: var(--radius);
+    margin: 0.5rem auto;
+    max-width: 900px;
+    border: 1px solid var(--border);
+}
+
+/* success (dark-friendly green) */
+.flash-success {
+    background: #052e1b;
+    color: #bbf7d0;
+}
+
+/* error (dark-friendly red) */
+.flash-error {
+    background: #3f0a0a;
+    color: #fecaca;
+}
