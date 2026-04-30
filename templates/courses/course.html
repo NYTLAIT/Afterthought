@@ -3,42 +3,46 @@
 {% block title %}{{ course.title }}{% endblock %}
 
 {% block content_header %}
-<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
+<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}"
+    class="back-link">←</a>
 <h1 class="content-title">{{ course.title }}</h1>
 {% endblock %}
 
-
 {% block content %}
-<div class="course-controls">
-    <p>{{ course.description }}</p>
 
-    <div class="course-controls-right">
-        <p>
-            Start: {{ course.start_date or "N/A" }} |
-            End: {{ course.end_date or "N/A" }}
-        </p>
-        <a class='a-button' href="{{ url_for('courses.edit', course_id=course.id, context='courses') }}">
-            Edit Course
-        </a>
+<div class="card">
+    <div class="card-header">
+        <p>{{ course.description }}</p>
+
+        <div class="actions">
+            <p class="muted">
+                {{ course.start_date or "N/A" }} | {{ course.end_date or "N/A" }}
+            </p>
+            <a class="btn btn-primary" href="{{ url_for('courses.edit', course_id=course.id, context='courses') }}">
+                Edit
+            </a>
+
+
+        </div>
     </div>
-
 </div>
 
-<h2>Sessions</h2>
+<div class="section-header">
+    <h2>Sessions</h2>
+    <a class="btn btn-secondary" href="{{ url_for('sessions.new', course_id=course.id) }}">
+        + Add Session
+    </a>
+</div>
 
-<a href="{{ url_for('sessions.new', course_id=course.id) }}">
-    + Add Session
-</a>
-
-<ul>
+<div class="list">
     {% for session in sessions %}
-    <li>
-        <strong>{{ session.title or "Untitled" }}</strong><br>
-        {{ (session.summary or '')[:100] }}...
-    </li>
+    <a class="list-item" href="{{ url_for('sessions.show', session_id=session.id) }}">
+        <h3>{{ session.title or "Untitled" }}</h3>
+        <p class="muted">{{ (session.summary or '')[:120] }}...</p>
+    </a>
     {% else %}
-    <p>No sessions yet.</p>
+    <p class="muted">No sessions yet.</p>
     {% endfor %}
-</ul>
+</div>
 
 {% endblock %}
