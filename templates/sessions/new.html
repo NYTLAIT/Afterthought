@@ -2,7 +2,7 @@
 {% block title %}New Session{% endblock %}
 
 {% block content_header %}
-<a href="{{ url_for('courses.show_one', course_id=course.id) }}">←</a>
+<a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">←</a>
 <h1 class="content-title">New Session — {{ course.title }}</h1>
 {% endblock %}
 
@@ -25,5 +25,5 @@
     </label>
     <button type="submit">Create Session</button>
 </form>
-<a href="{{ url_for('courses.show_one', course_id=course.id) }}">Cancel</a>
+<a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">Cancel</a>
 {% endblock %}

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}{{ course.title }}{% endblock %}
 
 {% block content_header %}
@@ -9,34 +8,36 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="card">
     <div class="card-header">
         <p>{{ course.description }}</p>
-
         <div class="actions">
             <p class="muted">
                 {{ course.start_date or "N/A" }} | {{ course.end_date or "N/A" }}
             </p>
-            <a class="btn btn-primary" href="{{ url_for('courses.edit', course_id=course.id, context='courses') }}">
+            <a class="btn btn-primary" href="{{ url_for('courses.edit', course_id=course.id, context=context) }}">
                 Edit
             </a>
-
-
+            <form method="POST" action="{{ url_for('courses.delete', course_id=course.id) }}">
+                <input type="hidden" name="context" value="{{ context }}">
+                <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this course?')">
+                    Delete
+                </button>
+            </form>
         </div>
     </div>
 </div>
 
 <div class="section-header">
     <h2>Sessions</h2>
-    <a class="btn btn-secondary" href="{{ url_for('sessions.new', course_id=course.id) }}">
+    <a class="btn btn-secondary" href="{{ url_for('sessions.new', course_id=course.id, context='course') }}">
         + Add Session
     </a>
 </div>
 
 <div class="list">
     {% for session in sessions %}
-    <a class="list-item" href="{{ url_for('sessions.show', session_id=session.id) }}">
+    <a class="list-item" href="{{ url_for('sessions.show_one', session_id=session.id, context='course') }}">
         <h3>{{ session.title or "Untitled" }}</h3>
         <p class="muted">{{ (session.summary or '')[:120] }}...</p>
     </a>
@@ -44,5 +45,4 @@
     <p class="muted">No sessions yet.</p>
     {% endfor %}
 </div>
-
 {% endblock %}

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}New Course{% endblock %}
 
 {% block content_header %}
@@ -21,7 +20,6 @@
     <label>End Date:
         <input type="date" name="end-date">
     </label>
-
     <button type="submit">Create Course</button>
 </form>
 <a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">Back</a>

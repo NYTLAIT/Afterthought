@@ -1,28 +1,26 @@
 {% extends "base.html" %}
-
 {% block title %}Edit {{ course.title }}{% endblock %}
 
 {% block content_header %}
-<a href="{{ url_for('courses.show_all') if context == 'courses' else url_for('dashboard.index') }}">←</a>
+<a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">←</a>
 <h1 class="content-title">Edit Course</h1>
 {% endblock %}
 
 {% block content %}
 <form method="POST">
     <label>Title:
-        <input type="text" name="title" value="{{course.title}}">
+        <input type="text" name="title" value="{{ course.title }}">
     </label>
     <label>Description:
         <textarea name="description">{{ course.description }}</textarea>
     </label>
     <label>Start Date:
-        <input type="date" name="start-date" value="{{course.start_date}}">
+        <input type="date" name="start-date" value="{{ course.start_date }}">
     </label>
     <label>End Date:
-        <input type="date" name="end-date" value="{{course.end_date}}">
+        <input type="date" name="end-date" value="{{ course.end_date }}">
     </label>
-
-    <button type="submit">Create Course</button>
+    <button type="submit">Save Changes</button>
 </form>
-<a href="{{ url_for('courses.show_one', course_id=course.id) }}">Cancel</a>
+<a href="{{ url_for('courses.show_one', course_id=course.id, context=context) }}">Cancel</a>
 {% endblock %}

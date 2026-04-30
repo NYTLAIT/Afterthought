@@ -2,7 +2,7 @@
 {% block title %}Edit {{ session.title or "Untitled Session" }}{% endblock %}
 
 {% block content_header %}
-<a href="{{ url_for('sessions.show_one', session_id=session.id) }}">←</a>
+<a href="{{ url_for('sessions.show_one', session_id=session.id, context=context) }}">←</a>
 <h1 class="content-title">Edit Session</h1>
 {% endblock %}
 
@@ -25,5 +25,5 @@
     </label>
     <button type="submit">Save Changes</button>
 </form>
-<a href="{{ url_for('sessions.show_one', session_id=session.id) }}">Cancel</a>
+<a href="{{ url_for('sessions.show_one', session_id=session.id, context=context) }}">Cancel</a>
 {% endblock %}

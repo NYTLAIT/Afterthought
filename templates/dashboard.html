@@ -1,19 +1,16 @@
 {% extends "base.html" %}
-
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
 <h1>Dashboard</h1>
 
 <h2>Recent Courses</h2>
-
 <ul>
     {% for course in recent_courses %}
     <li>
-        <a href="{{ url_for('courses.show_one', course_id=course.id) }}">
+        <a href="{{ url_for('courses.show_one', course_id=course.id, context='dashboard') }}">
             {{ course.title }}
         </a>
-
         {% if course.last_viewed %}
         <small>(Last viewed: {{ course.last_viewed.strftime('%Y-%m-%d %H:%M') }})</small>
         {% endif %}
@@ -26,16 +23,16 @@
 <hr>
 
 <h2>Recent Sessions</h2>
-
 <ul>
     {% for session in recent_sessions %}
     <li>
-        <strong>{{ session.title or "Untitled" }}</strong><br>
-        {{ (session.summary or '')[:100] }}...
+        <a href="{{ url_for('sessions.show_one', session_id=session.id, context='dashboard') }}">
+            <strong>{{ session.title or "Untitled" }}</strong><br>
+            {{ (session.summary or '')[:100] }}...
+        </a>
     </li>
     {% else %}
     <p>No sessions yet.</p>
     {% endfor %}
 </ul>
-
 {% endblock %}
